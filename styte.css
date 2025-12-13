@@ -1,0 +1,899 @@
+/* =========================================
+   PROFESSOR'S NOTES ON CSS ARCHITECTURE
+   ========================================= */
+
+/* 1. CSS VARIABLES (:root)
+   This is the most important part for your future goals. 
+   We define all our colors here. To change the theme from white 
+   to a dark Pokemon theme later, you only need to change the hex codes 
+   right here in the :root block.
+*/
+:root {
+    /* POKEMON THEME FONTS */
+    /* CAN CHANGE FONT: The heading font */
+    --font-heading: 'Bangers', cursive; 
+    --font-body: 'Roboto', sans-serif;
+
+    /* Theme Colors */
+    /* CAN CHANGE COLOR: General Backgrounds */
+    --bg-main: #F0F2F5; /* The light gray background from the design */
+    --bg-card: #FFFFFF; /* White card background */
+    --text-primary: #222222;
+    --text-secondary: #666666;
+
+    /* Accents */
+    /* CAN CHANGE COLOR: Button colors */
+    --btn-color: #Dddddd; 
+    
+    /* Pokemon Type Colors (Crucial for the cards) */
+    /* CAN CHANGE COLOR: Type specific colors */
+    --plant-color: #78C850; /* Bulbasaur Green */
+    --aqua-color: #6890F0;  /* Squirtle Blue */
+    --fire-color: #F08030;  /* Charmander Red/Orange */
+    --link-blue: #4A90E2;
+    --link-red: #E74C3C;
+    --link-green: #2ECC71;
+    --link-aqua: var(--aqua-color);
+}
+
+/* 2. GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Essential for predictable sizing */
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-main); /* Using the variable */
+    color: var(--text-primary);
+    overflow-x: hidden; /* Prevent accidental horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Pushes footer to bottom */
+    padding: 2rem;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* ================= HEADER & NAV ================= */
+.main-header {
+    /* Approach: Flexbox for easy horizontal alignment of logo and nav */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: var(--bg-main); /* Blends with body */
+}
+
+.logo-placeholder {
+    /* CAN CHANGE IMAGE: Placeholder for logo */
+    width: 60px;
+    height: 60px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem; /* Spacing between links */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Specific Link Colors */
+.text-blue { color: var(--link-blue) !important; }
+.text-red { color: var(--link-red) !important; }
+.text-green { color: var(--link-green) !important; }
+
+
+/* ================= HERO SECTION (HOME) ================= */
+.hero-container {
+    /* Approach: Flexbox to put text on left, image on right */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 70vh;
+    padding: 0 3rem;
+    overflow: hidden;
+}
+
+.hero-video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(240, 242, 245, 0.85);
+    z-index: 1;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1, 
+.hero-content h2 {
+    font-family: var(--font-heading); /* Using the Pokemon style font */
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+/* CAN CHANGE BUTTON STYLE */
+.btn-primary {
+    padding: 1rem 3rem;
+    background-color: var(--btn-color);
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+}
+
+/* Mockup for the Charizard Image */
+.charizard-mockup {
+    width: 500px;
+    height: 500px;
+    background-color: #ccc; /* Gray placeholder */
+    background-image: url('img.png.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+    /* Giving it a glow based on the design */
+    box-shadow: 0 0 50px rgba(240, 128, 48, 0.4); 
+    border-radius: 20px;
+}
+
+
+/* ================= PROGRESS SECTION ================= */
+.progress-container {
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--link-aqua);
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+}
+
+/* GRID APPROACH FOR CARDS */
+.cards-grid {
+    /* Approach: CSS Grid is perfect here. It creates columns that automatically 
+       resize and wrap based on the available width. No media queries needed for basic wrapping! */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 3rem;
+    justify-items: center;
+}
+
+.card {
+    /* CAN CHANGE: Card Background Style */
+    background-color: var(--bg-card);
+    border-radius: 30px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 440px;
+    min-height: 420px;
+    /* Soft shadow for depth */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* allow inner content to take full width */
+    overflow: hidden; /* prevent inner elements from visually overflowing */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.task-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 100px;
+    transition: background-color 0.2s ease;
+}
+
+.task-list.drag-over {
+    background-color: rgba(74, 144, 226, 0.08);
+    border-radius: 10px;
+    outline: 2px dashed #4A90E2;
+    outline-offset: 4px;
+}
+
+.add-task-form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.priority-selector {
+    width: 100%;
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.priority-btn {
+    flex: 1;
+    padding: 0.45rem 0.6rem;
+    border: 2px solid #dcdfe3;
+    background: #f4f5f7;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.priority-btn:hover {
+    background: #e7ebf0;
+    border-color: #a8b4c1;
+}
+
+.priority-btn.active {
+    background: #e6f4ea;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.priority-btn[data-priority="medium"].active {
+    background: #fff3e0;
+    border-color: #ff9800;
+    color: #e65100;
+}
+
+.priority-btn[data-priority="high"].active {
+    background: #ffebee;
+    border-color: #f44336;
+    color: #c62828;
+}
+
+.add-task-form input {
+    flex: 1 1 100%; /* input spans full row */
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #dcdfe3;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.add-task-form button {
+    flex: 1 1 30%; /* buttons share space and wrap */
+    min-width: 0; /* prevent overflow due to intrinsic width */
+}
+
+.task-chip {
+    width: 100%;
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    cursor: grab;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.task-chip:active {
+    cursor: grabbing;
+}
+
+.task-chip.dragging {
+    opacity: 0.5;
+    border: 2px dashed #4A90E2;
+    background: #e8f4fd;
+    transform: scale(0.98);
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.priority-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.65rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    background: #f0f0f0;
+    color: #333;
+}
+
+.progress-control {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-value {
+    color: var(--aqua-color);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.progress-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+    outline: none;
+    background: #e0e0e0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.progress-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--aqua-color);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.progress-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.progress-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--aqua-color);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.progress-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--aqua-color) 0%, #4a90e2 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.task-label {
+    text-align: left;
+    font-weight: 700;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 0;
+    flex: 1;
+}
+
+.task-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 0.6rem;
+}
+
+.status-btn {
+    padding: 0.5rem 0.9rem;
+    border-radius: 12px;
+    border: 1px solid #dcdfe3;
+    background: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    width: 100%; /* make buttons fill grid cell */
+}
+
+.status-btn.to-progress:hover {
+    background-color: #ffe6e6;
+    border-color: #e57373;
+    color: #c62828;
+}
+
+.status-btn.to-completed:hover {
+    background-color: #e6f4ea;
+    border-color: #81c784;
+    color: #2e7d32;
+}
+
+.icon-btn {
+    padding: 0.45rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #dcdfe3;
+    background: #f4f5f7;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    width: 100%;
+}
+
+.icon-btn:hover {
+    background-color: #e7ebf0;
+    border-color: #c5c9d1;
+}
+
+.status-btn:disabled,
+.icon-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Card Image Wrapper & Circular Progress */
+.card-image-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The SVG ring rotation to start from top */
+.progress-ring {
+   transform: rotate(-90deg);
+}
+
+/* MOCKUP IMAGES FOR POKEMON CARDS */
+.pokemon-img-mockup {
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    z-index: 2; /* Ensure image is above the ring */
+}
+
+/* CAN CHANGE IMAGES: Actual images would go here */
+.bulbasaur-mockup { background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'); }
+.squirtle-mockup { background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png'); }
+.charmander-mockup { background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'); }
+
+
+.card h3 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.pokemon-type {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Stats Bars */
+.stats-container {
+    width: 100%;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.stat-row label {
+    flex: 1;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.progress-bar {
+    flex: 2;
+    height: 10px;
+    background-color: #E0E0E0; /* Light gray track */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 1rem;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    border-radius: 10px;
+    /* Default color, overridden by theme specific colors below */
+    background-color: #ccc; 
+}
+
+/* CARD THEMING (Connecting colors to specific cards) */
+.card.theme-plant .fill { background-color: var(--plant-color); }
+.card.theme-aqua h3 { color: var(--text-primary); } /* Resetting text color from design screenshot quirk */
+.card.theme-aqua .fill { background-color: var(--aqua-color); }
+.card.theme-fire .fill { background-color: var(--fire-color); }
+
+
+/* ================= FOOTER SLIDER MOCKUP ================= */
+.slider-mockup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.slider-track {
+    width: 60%;
+    height: 8px;
+    background-color: #E0E0E0;
+    border-radius: 4px;
+    position: relative;
+}
+
+.slider-thumb {
+    /* CAN CHANGE: Slider thumb appearance */
+    width: 30%; /* Simulating the size in the screenshot */
+    height: 8px;
+    background-color: #999;
+    border-radius: 4px;
+    position: absolute;
+    left: 0; /* Starting position */
+}
+
+.arrow {
+    font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+/* ================= MEDIA QUERIES (RESPONSIVENESS) ================= */
+
+/* TABLET (Portrait iPads, small laptops) */
+@media (max-width: 1024px) {
+    .main-header {
+        padding: 1rem 2rem;
+    }
+    
+    .nav-links {
+        gap: 1.5rem;
+    }
+    
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .charizard-mockup {
+        width: 400px;
+        height: 400px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .card {
+        max-width: 380px;
+    }
+}
+
+/* MOBILE (Phones in landscape and portrait) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .main-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .logo-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    /* Stack the Hero section vertically on mobile */
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 2rem 1rem;
+        min-height: 0;
+    }
+
+    .hero-content {
+        margin-top: 2rem;
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.4rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+
+    .hero-image-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .charizard-mockup {
+        width: 280px;
+        height: 280px;
+    }
+
+    .hero-video {
+        min-width: auto;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-overlay {
+        background: rgba(240, 242, 245, 0.92);
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .card {
+        max-width: 100%;
+        padding: 1.5rem;
+        min-height: 0;
+    }
+
+    .card-image-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pokemon-img-mockup {
+        width: 70px;
+        height: 70px;
+    }
+
+    .progress-ring {
+        width: 100px;
+        height: 100px;
+    }
+
+    .card h3 {
+        font-size: 1.3rem;
+    }
+
+    .pokemon-type {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .add-task-form {
+        gap: 0.4rem;
+    }
+
+    .add-task-form input {
+        padding: 0.5rem 0.65rem;
+        font-size: 0.9rem;
+    }
+
+    .add-task-form button {
+        flex: 1 1 45%;
+        font-size: 0.85rem;
+        padding: 0.45rem 0.6rem;
+    }
+
+    .task-chip {
+        padding: 0.85rem;
+    }
+
+    .task-label {
+        font-size: 0.95rem;
+    }
+
+    .task-controls {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .status-btn, .icon-btn {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.7rem;
+    }
+
+    .progress-label {
+        font-size: 0.85rem;
+    }
+
+    .progress-value {
+        font-size: 0.9rem;
+    }
+
+    .slider-mockup {
+        padding: 1.5rem 1rem;
+    }
+
+    .slider-track {
+        width: 70%;
+    }
+}
+
+/* SMALL MOBILE (Very small phones) */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .charizard-mockup {
+        width: 220px;
+        height: 220px;
+    }
+
+    .hero-overlay {
+        background: rgba(240, 242, 245, 0.95);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    .add-task-form button {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+}

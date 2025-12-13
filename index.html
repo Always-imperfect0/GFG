@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon To-Do App</title>
+    <link rel="stylesheet" href="styte.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="logo-placeholder"></div>
+
+        <nav class="nav-links">
+            <a href="#" id="nav-home" class="active">HOME</a>
+            <a href="#" id="nav-todo">TO DO</a>
+            <a href="#" class="text-blue">ADD TASK</a>
+            <a href="#" class="text-red">PENDING TASKS</a>
+            <a href="#" class="text-green">COMPLETED TASK</a>
+            <a href="#">PROFILE</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-section" class="hero-container">
+            <div class="hero-video-bg">
+                <video autoplay muted loop playsinline class="hero-video">
+                    <source src="hero-video.mp4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="hero-overlay"></div>
+            </div>
+
+            <div class="hero-content">
+                <h1>HELLO ALL POKEMON LOVER</h1>
+                <h2>WELCOME TO OUR TO DO WEB</h2>
+
+                <button id="get-started-btn" class="btn-primary">GET STARTED</button>
+            </div>
+
+            <div class="hero-image-container">
+                <div class="charizard-mockup" aria-label="Pokemon hero image"></div>
+            </div>
+        </section>
+
+
+        <section id="progress-section" class="progress-container hidden">
+            <h2 class="section-title">YOUR PROGRESS WITH YOUR POKEMON</h2>
+
+            <div class="cards-grid">
+                <div class="card theme-plant">
+                    <div class="card-image-wrapper">
+                        <div class="pokemon-img-mockup bulbasaur-mockup"></div>
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle" stroke="var(--plant-color)" stroke-width="8"
+                                fill="transparent" r="52" cx="60" cy="60" />
+                        </svg>
+                    </div>
+                    <h3>TO DO</h3>
+                    <span class="pokemon-type">Plant</span>
+                    <form id="add-task-form" class="add-task-form">
+                        <div class="priority-selector">
+                            <button type="button" class="priority-btn" data-priority="low" title="Normal Quest">🟢
+                                Normal</button>
+                            <button type="button" class="priority-btn" data-priority="medium" title="Important Quest">🟡
+                                Important</button>
+                            <button type="button" class="priority-btn" data-priority="high" title="Gym Battle">🔴
+                                Urgent</button>
+                        </div>
+                        <input type="text" id="add-task-input" placeholder="Add a task" aria-label="Add a task" />
+                        <button type="button" id="add-to-progress" class="status-btn to-progress">In Progress</button>
+                        <button type="button" id="add-to-completed" class="status-btn to-completed">Completed</button>
+                        <button type="submit" class="icon-btn">Add</button>
+                    </form>
+                    <div class="task-list" data-list="todo"></div>
+                </div>
+
+                <div class="card theme-aqua">
+                    <div class="card-image-wrapper">
+                        <div class="pokemon-img-mockup squirtle-mockup"></div>
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle" stroke="var(--aqua-color)" stroke-width="8"
+                                stroke-dasharray="250, 326" fill="transparent" r="52" cx="60" cy="60" />
+                        </svg>
+                    </div>
+                    <h3>IN PROGRESS</h3>
+                    <span class="pokemon-type">Aqua</span>
+                    <div class="task-list" data-list="in-progress"></div>
+                </div>
+
+                <div class="card theme-fire">
+                    <div class="card-image-wrapper">
+                        <div class="pokemon-img-mockup charmander-mockup"></div>
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring__circle" stroke="var(--fire-color)" stroke-width="8"
+                                stroke-dasharray="300, 326" fill="transparent" r="52" cx="60" cy="60" />
+                        </svg>
+                    </div>
+                    <h3>COMPLETED</h3>
+                    <span class="pokemon-type">Fire</span>
+                    <div class="task-list" data-list="completed"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="slider-mockup">
+        <span class="arrow">&lt;</span>
+        <div class="slider-track">
+            <div class="slider-thumb"></div>
+        </div>
+        <span class="arrow">&gt;</span>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
